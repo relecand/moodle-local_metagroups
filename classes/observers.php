@@ -46,14 +46,16 @@ class observers {
     public static function group_created(\core\event\group_created $event) {
         global $DB;
 
+        $syncall = get_config('local_metagroups', 'syncall');
+
         $group = $event->get_record_snapshot('groups', $event->objectid);
 
         $courseids = local_metagroups_parent_courses($group->courseid);
         foreach ($courseids as $courseid) {
             $course = get_course($courseid);
 
-            // If parent course doesn't use groups, we can skip synchronization.
-            if (groups_get_course_groupmode($course) == NOGROUPS) {
+            // If parent course doesn't use groups and syncall disabled, we can skip synchronization.
+            if (!$syncall && groups_get_course_groupmode($course) == NOGROUPS) {
                 continue;
             }
 

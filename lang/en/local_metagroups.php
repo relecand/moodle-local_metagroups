@@ -25,4 +25,6 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Meta-course group synchronization';
+$string['syncall'] = 'Syncronize groups in all courses';
+$string['syncall_desc'] = 'If enabled, this plugin will syncronize groups in courses, where group mode is set to "No groups".';
 $string['synctask'] = 'Meta-course group synchronization';

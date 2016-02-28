@@ -29,8 +29,9 @@ Vadim Dvorovenko (Vadimon@mail.ru)
 
 Changes
 -------
-Release 1.4.0 (build 2016022800):
+Release 1.4 (build 2016022802):
 - Add scheduled tasks for synchronization.
+- Synchronize parent courses that use groups or all courses, depending on setting.
 
 Release 1.3 (build 2014103100):
 - CLI script can now synchronize specific courses.

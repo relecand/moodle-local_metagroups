@@ -74,11 +74,13 @@ function local_metagroups_sync(progress_trace $trace, $courseid = null) {
         $courseids = local_metagroups_parent_courses();
     }
 
+    $syncall = get_config('local_metagroups', 'syncall');
+
     foreach (array_unique($courseids) as $courseid) {
         $parent = get_course($courseid);
 
-        // If parent course doesn't use groups, we can skip synchronization.
-        if (groups_get_course_groupmode($parent) == NOGROUPS) {
+        // If parent course doesn't use groups and syncall disabled, we can skip synchronization.
+        if (!$syncall && groups_get_course_groupmode($parent) == NOGROUPS) {
             continue;
         }
 
