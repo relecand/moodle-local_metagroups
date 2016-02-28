@@ -157,4 +157,89 @@ class observers {
             }
         }
     }
+
+    /**
+     * Grouping created
+     *
+     * @param \core\event\grouping_created $event
+     * @return void
+     */
+    public static function grouping_created(\core\event\grouping_created $event) {
+        global $DB;
+
+        $syncgroupings = get_config('local_metagroups', 'syncgroupings');
+        if (!$syncgroupings) {
+            return;
+        }
+
+        $grouping = $event->get_record_snapshot('groupings', $event->objectid);
+
+        $courseids = local_metagroups_parent_courses($grouping->courseid);
+        foreach ($courseids as $courseid) {
+            $course = $DB->get_record('course', array('id' => $courseid), '*', MUST_EXIST);
+
+            if (!$DB->record_exists('groupings', array('courseid' => $course->id, 'idnumber' => $grouping->id))) {
+                $metagrouping = new \stdClass();
+                $metagrouping->courseid = $course->id;
+                $metagrouping->idnumber = $grouping->id;
+                $metagrouping->name = $grouping->name;
+                groups_create_grouping($metagrouping);
+            }
+        }
+    }
+
+    /**
+     * Grouping deleted
+     *
+     * @param \core\event\grouping_deleted $event
+     * @return void
+     */
+    public static function grouping_deleted(\core\event\grouping_deleted $event) {
+        global $DB;
+
+        $syncgroupings = get_config('local_metagroups', 'syncgroupings');
+        if (!$syncgroupings) {
+            return;
+        }
+
+        $grouping = $event->get_record_snapshot('groupings', $event->objectid);
+
+        $courseids = local_metagroups_parent_courses($grouping->courseid);
+
+        foreach ($courseids as $courseid) {
+            $course = $DB->get_record('course', array('id' => $courseid), '*', MUST_EXIST);
+
+            if ($metagrouping = $DB->get_record('groupings', array('courseid' => $course->id, 'idnumber' => $grouping->id))) {
+                groups_delete_grouping($metagrouping);
+            }
+        }
+    }
+
+    /**
+     * Grouping updated
+     *
+     * @param \core\event\grouping_updated $event
+     * @return void
+     */
+    public static function grouping_updated(\core\event\grouping_updated $event) {
+        global $DB;
+
+        $syncgroupings = get_config('local_metagroups', 'syncgroupings');
+        if (!$syncgroupings) {
+            return;
+        }
+
+        $grouping = $event->get_record_snapshot('groupings', $event->objectid);
+
+        $courseids = local_metagroups_parent_courses($grouping->courseid);
+        foreach ($courseids as $courseid) {
+            $course = $DB->get_record('course', array('id' => $courseid), '*', MUST_EXIST);
+
+            if ($metagrouping = $DB->get_record('groupings', array('courseid' => $course->id, 'idnumber' => $grouping->id))) {
+                $metagrouping->name = $grouping->name;
+                groups_update_grouping($metagrouping);
+            }
+        }
+    }
+
 }

@@ -32,4 +32,9 @@ if ($hassiteconfig) {
             get_string('syncall', 'local_metagroups'),
             get_string('syncall_desc', 'local_metagroups'),
             0));
+    $settings->add(new admin_setting_configcheckbox(
+            'local_metagroups/syncgroupings',
+            get_string('syncgroupings', 'local_metagroups'),
+            get_string('syncgroupings_desc', 'local_metagroups'),
+            1));
 }
