@@ -3,8 +3,8 @@ Moodle Meta-course Group Synchronization
 
 Requirements
 ------------
-- Moodle 2.6 (build 2013111800) or later.
-- Meta-course enrolment (build 2013110500 or later).
+- Moodle 2.7 (build 2014051200) or later.
+- Meta-course enrolment (build 2014051200 or later).
 
 Installation
 ------------
@@ -13,20 +13,25 @@ Copy the metagroups folder into your Moodle /local directory and visit your Admi
 Usage
 -----
 After installation, or when creating new meta-course enrolment instances, you may need to synchronize existing groups. To do this
-run the cli/sync.php script (use the --help switch for further instructions on usage).
+run the cli/sync.php script (use the --help switch for further instructions on usage) or enable Meta-course group synchronization
+scheduled task.
 
 Any future amendments to groups (add, update and delete) and their membership (add or remove users) in 'child' courses will be automatically
 reflected in 'parent' courses that use groups.
 
-Author
-------
+Authors
+-------
 Paul Holden (pholden@greenhead.ac.uk)
+Vadim Dvorovenko (Vadimon@mail.ru)
 
 - Updates: https://moodle.org/plugins/view.php?plugin=local_metagroups
 - Latest code: https://github.com/paulholden/moodle-local_metagroups
 
 Changes
 -------
+Release 1.4.0 (build 2016022800):
+- Add scheduled tasks for synchronization.
+
 Release 1.3 (build 2014103100):
 - CLI script can now synchronize specific courses.
 - API & documentation updates.
