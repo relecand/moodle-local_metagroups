@@ -24,6 +24,7 @@ Authors
 - Paul Holden (pholden@greenhead.ac.uk) 
 - Vadim Dvorovenko (Vadimon@mail.ru)
 - François Lumineau (flumineau@iae.univ-poitiers.fr)
+- Danny Jung (dannyjung90@gmail.com)
 
 Links
 -----
@@ -37,6 +38,7 @@ Release 1.4 (build 2016022802):
 - Synchronize parent courses that use groups or all courses, depending on setting.
 - Synchronization of groupings on meta courses, depending on settings. Currently groupings are syncronized 
 on-the-fly, while group to groupings assignments are syncronized only on sync task.
+- Synchronization of group description and picture.
 
 Release 1.3 (build 2014103100):
 - CLI script can now synchronize specific courses.

@@ -64,6 +64,12 @@ class observers {
                 $metagroup->courseid = $course->id;
                 $metagroup->idnumber = $group->id;
                 $metagroup->name = $group->name;
+                $metagroup->description = $group->description;
+                $metagroup->descriptionformat = $group->descriptionformat;
+                $metagroup->picture = $group->picture;
+                $metagroup->hidepicture = $group->hidepicture;
+                // No need to sync enrolmentkey, user should be able to enrol only on source course.
+                $metagroup->enrolmentkey = null;
 
                 groups_create_group($metagroup, false, false);
             }
@@ -87,6 +93,12 @@ class observers {
 
             if ($metagroup = $DB->get_record('groups', array('courseid' => $course->id, 'idnumber' => $group->id))) {
                 $metagroup->name = $group->name;
+                $metagroup->description = $group->description;
+                $metagroup->descriptionformat = $group->descriptionformat;
+                $metagroup->picture = $group->picture;
+                $metagroup->hidepicture = $group->hidepicture;
+                // No need to sync enrolmentkey, user should be able to enrol only on source course.
+                $metagroup->enrolmentkey = null;
 
                 groups_update_group($metagroup, false, false);
             }
