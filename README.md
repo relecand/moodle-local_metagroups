@@ -39,6 +39,7 @@ Release 1.4 (build 2016022802):
 - Synchronization of groupings on meta courses, depending on settings. Currently groupings are syncronized 
 on-the-fly, while group to groupings assignments are syncronized only on sync task.
 - Synchronization of group description and picture.
+- Added automatic syncronization on meta enrol instance creation (Moodle 3.0 and higher).
 
 Release 1.3 (build 2014103100):
 - CLI script can now synchronize specific courses.

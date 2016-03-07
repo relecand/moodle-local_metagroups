@@ -273,4 +273,58 @@ class observers {
         local_metagroups_sync($trace, $event->objectid);
         $trace->finished();
     }
+
+    /**
+     * Enrol instance created
+     *
+     * @param \core\event\enrol_instance_created $event
+     * @return void
+     */
+    public static function enrol_instance_created(\core\event\enrol_instance_created $event) {
+        global $DB;
+
+        $instance = $event->get_record_snapshot('enrol', $event->objectid);
+        if ($instance->enrol === 'meta') {
+            enrol_meta_sync($instance->courseid, false);
+            $trace = new \null_progress_trace();
+            local_metagroups_sync($trace, $instance->courseid);
+            $trace->finished();
+        }
+    }
+
+    /**
+     * Enrol instance update
+     *
+     * @param \core\event\enrol_instance_updated $event
+     * @return void
+     */
+    public static function enrol_instance_updated(\core\event\enrol_instance_updated $event) {
+        global $DB;
+
+        $instance = $event->get_record_snapshot('enrol', $event->objectid);
+        if ($instance->enrol === 'meta') {
+            enrol_meta_sync($instance->courseid, false);
+            $trace = new \null_progress_trace();
+            local_metagroups_sync($trace, $instance->courseid);
+            $trace->finished();
+        }
+    }
+
+    /**
+     * Enrol instance deleted
+     *
+     * @param \core\event\enrol_instance_deleted $event
+     * @return void
+     */
+    public static function enrol_instance_deleted(\core\event\enrol_instance_deleted $event) {
+        global $DB;
+
+        $instance = $event->get_record_snapshot('enrol', $event->objectid);
+        if ($instance->enrol === 'meta') {
+            enrol_meta_sync($instance->courseid, false);
+            $trace = new \null_progress_trace();
+            local_metagroups_sync($trace, $instance->courseid);
+            $trace->finished();
+        }
+    }
 }

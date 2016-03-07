@@ -70,4 +70,18 @@ $observers = array(
         'callback'  => '\local_metagroups\observers::course_updated',
     ),
 
+    array(
+        'eventname' => '\core\event\enrol_instance_created',
+        'callback'  => '\local_metagroups\observers::enrol_instance_created',
+    ),
+
+    array(
+        'eventname' => '\core\event\enrol_instance_updated',
+        'callback'  => '\local_metagroups\observers::enrol_instance_updated',
+    ),
+
+    array(
+        'eventname' => '\core\event\enrol_instance_deleted',
+        'callback'  => '\local_metagroups\observers::enrol_instance_deleted',
+    ),
 );
