@@ -65,4 +65,9 @@ $observers = array(
         'callback'  => '\local_metagroups\observers::grouping_deleted',
     ),
 
+    array(
+        'eventname' => '\core\event\course_updated',
+        'callback'  => '\local_metagroups\observers::course_updated',
+    ),
+
 );

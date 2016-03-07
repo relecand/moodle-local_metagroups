@@ -254,4 +254,23 @@ class observers {
         }
     }
 
+    /**
+     * Course updated
+     * We need to listen for course_updated event to check situation, when group mode changed from NOGROUPS
+     *
+     * @param \core\event\course_updated $event
+     * @return void
+     */
+    public static function course_updated(\core\event\course_updated $event) {
+        global $DB;
+
+        $syncall = get_config('local_metagroups', 'syncall');
+        if ($syncall) {// If syncall is on, then course is alredy synced.
+            return;
+        }
+
+        $trace = new \null_progress_trace();
+        local_metagroups_sync($trace, $event->objectid);
+        $trace->finished();
+    }
 }
