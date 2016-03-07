@@ -84,4 +84,15 @@ $observers = array(
         'eventname' => '\core\event\enrol_instance_deleted',
         'callback'  => '\local_metagroups\observers::enrol_instance_deleted',
     ),
+
+    array(
+        'eventname' => '\core\event\grouping_group_assigned',
+        'callback'  => '\local_metagroups\observers::grouping_group_assigned',
+    ),
+
+    array(
+        'eventname' => '\core\event\grouping_group_unassigned',
+        'callback'  => '\local_metagroups\observers::grouping_group_unassigned',
+    ),
+
 );

@@ -33,11 +33,12 @@ Links
 
 Changes
 -------
-Release 1.4 (build 2016022802):
+Release 1.4 (build 2016022806):
 - Add scheduled tasks for synchronization.
 - Synchronize parent courses that use groups or all courses, depending on setting.
-- Synchronization of groupings on meta courses, depending on settings. Currently groupings are syncronized 
-on-the-fly, while group to groupings assignments are syncronized only on sync task.
+- Synchronization of groupings on meta courses, depending on settings. Groupings are syncronized 
+on-the-fly. Group to groupings assignments are syncronized on sync task (prior to Moodle 3.1) or
+on event trigger (Moodle 3.1 and higher).
 - Synchronization of group description and picture.
 - Added automatic syncronization on meta enrol instance creation (Moodle 3.0 and higher).
 

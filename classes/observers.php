@@ -327,4 +327,61 @@ class observers {
             $trace->finished();
         }
     }
+
+    /**
+     * Group assigned to grouping
+     *
+     * @param \core\event\grouping_group_assigned $event
+     * @return void
+     */
+    public static function grouping_group_assigned(\core\event\grouping_group_assigned $event) {
+        global $DB;
+
+        $syncgroupings = get_config('local_metagroups', 'syncgroupings');
+        if (!$syncgroupings) {
+            return;
+        }
+
+        $grouping = $event->get_record_snapshot('groupings', $event->objectid);
+        $groupid = $event->other['groupid'];
+
+        $parents = local_metagroups_parent_courses($grouping->courseid);
+        foreach($parents as $parentid) {
+            if ($metagrouping = $DB->get_record('groupings', array('courseid' => $parentid, 'idnumber' => $grouping->id))) {
+                $targetgroups = local_metagroups_group_match($groupid, $parentid);
+                foreach ($targetgroups as $targetgroup) {
+                    groups_assign_grouping($metagrouping->id, $targetgroup->id);
+                }
+            }
+        }
+    }
+
+    /**
+     * Group unassigned from grouping
+     *
+     * @param \core\event\grouping_group_assigned $event
+     * @return void
+     */
+    public static function grouping_group_unassigned(\core\event\grouping_group_unassigned $event) {
+        global $DB;
+
+        $syncgroupings = get_config('local_metagroups', 'syncgroupings');
+        if (!$syncgroupings) {
+            return;
+        }
+
+        $grouping = $event->get_record_snapshot('groupings', $event->objectid);
+        $groupid = $event->other['groupid'];
+
+        $parents = local_metagroups_parent_courses($grouping->courseid);
+        foreach($parents as $parentid) {
+            if ($metagrouping = $DB->get_record('groupings', array('courseid' => $parentid, 'idnumber' => $grouping->id))) {
+                $targetgroups = local_metagroups_group_match($groupid, $parentid);
+                foreach ($targetgroups as $targetgroup) {
+                    groups_unassign_grouping($metagrouping->id, $targetgroup->id);
+                }
+            }
+        }
+    }
+
 }
